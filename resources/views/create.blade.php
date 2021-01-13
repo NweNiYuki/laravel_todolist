@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<form action="" method="post" enctype="multipart/form-data">
+		<form action="/todo" method="post" enctype="multipart/form-data">
 			@csrf
 		<div class="form-group">
 		<label>Title</label>

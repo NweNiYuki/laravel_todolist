@@ -20,6 +20,7 @@ class CreateTodosTable extends Migration
             $table->text('reason');
             $table->timestamps();
         });
+
     }
 
     /**

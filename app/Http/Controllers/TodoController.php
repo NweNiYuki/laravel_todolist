@@ -14,8 +14,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        
-        return view ('show');
+        $todo = Todo::all();   
+        return view ('show', compact('todo'));
     }
 
     /**
@@ -37,7 +37,14 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = new Todo();
+        $todo->title = $request->title;
+        $todo->content = $request->content;
+        $todo->reason = $request->reason;
+
+        $todo->save();
+return redirect('todo');
+
     }
 
     /**
@@ -59,7 +66,8 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $todo = Todo::find($id);
+        return view('edit', compact('todo'));
     }
 
     /**
@@ -71,8 +79,14 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $todo = Todo::find($id);
+        $todo->title = request()->title;
+        $todo->content = request()->content;
+        $todo->reason = request()->reason;
+
+        $todo->save();
+
+        return redirect('todo');    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +94,10 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Todo $todo)
     {
-        //
+
+        $todo->delete();
+        return redirect('todo');
     }
 }

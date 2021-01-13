@@ -7,34 +7,38 @@
    
 <table class="table">
  <a href="/todo/create"> <button class="btn btn-primary">Add new</button>
-  <caption>List of users</caption>
+  <caption>List of 2021 Planner</caption>
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">NO</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">CONTENT</th>
+      <th scope="col">REASON</th>
     </tr>
   </thead>
   <tbody>
+    @foreach ($todo as $list)
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      
+      <th scope="row">{{ $list->id }}</th>
+      <td>{{ $list->title }}</td>
+      <td>{{ $list->content }}</td>
+      <td>{{ $list->reason }}</td>
+
+      <form method="post" action="/todo/{{$list->id}}">
+
+            @csrf
+            @method("DELETE")
+      <td>
+        <button class="btn btn-info">DEL</button>
+      
+        <a href="/todo/{{$list->id}}/edit" class="btn btn-info">EDIT</a>
+      </td>
+      </form>
+     
+     
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+     @endforeach
   </tbody>
 </table>
 
